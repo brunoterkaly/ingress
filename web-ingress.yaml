@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web-ingress
+spec:
+  tls:
+  - hosts:
+    - terkaly.com
+    secretName: web-secret
+  rules:
+  - host: terkaly.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-frontend-svc
+          servicePort: 80
+      - path: /healthz
+        backend:
+          serviceName: web-frontend-svc
+          servicePort: 80
+      - path: /healthzdb
+        backend:
+          serviceName: web-frontend-svc
+          servicePort: 80
+      - path: /init
+        backend:
+          serviceName: web-frontend-svc
+          servicePort: 80
+      - path: /courses/add
+        backend:
+          serviceName: web-frontend-svc
+          servicePort: 80
+      - path: /courses/*
+        backend:
+          serviceName: web-frontend-svc
+          servicePort: 80
